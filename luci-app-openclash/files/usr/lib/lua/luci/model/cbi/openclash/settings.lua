@@ -49,6 +49,8 @@ o.description = translate("Select Mode For OpenClash Work, Network Error Try Flu
 o:value("redir-host", translate("redir-host"))
 o:value("fake-ip", translate("fake-ip"))
 o:value("fake-ip-tun", translate("fake-ip(tun mode)"))
+o:value("redir-host-vpn", translate("redir-host-vpn(game mode)"))
+o:value("fake-ip-vpn", translate("fake-ip-vpn(game mode)"))
 o.default = "redir-host"
 
 o = s:taboption("settings", ListValue, "proxy_mode", font_red..bold_on..translate("Proxy Mode")..bold_off..font_off)
@@ -201,7 +203,7 @@ o:depends("rule_source", "ConnersHua_return")
    end
    file:seek("set")
 o = s:taboption("rules", ListValue, "Apple", translate("Apple"))
----- o:depends("rule_source", "lhie1")
+o:depends("rule_source", "lhie1")
 o:depends("rule_source", "ConnersHua")
  for l in file:lines() do
    o:value(l)
@@ -226,7 +228,7 @@ o:depends("rule_source", "lhie1")
    end
    file:seek("set")
 o = s:taboption("rules", ListValue, "AdBlock", translate("AdBlock"))
----- o:depends("rule_source", "lhie1")
+o:depends("rule_source", "lhie1")
 o:depends("rule_source", "ConnersHua")
  for l in file:lines() do
    o:value(l)
@@ -281,7 +283,7 @@ o.inputstyle = "reload"
 o.write = function()
   m.uci:set("openclash", "config", "enable", 1)
   m.uci:commit("openclash")
-  SYS.call("sh /usr/share/openclash/openclash_rule.sh >/dev/null 2>&1 &")
+  SYS.call("/usr/share/openclash/openclash_rule.sh >/dev/null 2>&1 &")
   HTTP.redirect(DISP.build_url("admin", "services", "openclash"))
 end
 
@@ -315,7 +317,7 @@ o.inputstyle = "reload"
 o.write = function()
   m.uci:set("openclash", "config", "enable", 1)
   m.uci:commit("openclash")
-  SYS.call("sh /usr/share/openclash/openclash_ipdb.sh >/dev/null 2>&1 &")
+  SYS.call("/usr/share/openclash/openclash_ipdb.sh >/dev/null 2>&1 &")
   HTTP.redirect(DISP.build_url("admin", "services", "openclash"))
 end
 

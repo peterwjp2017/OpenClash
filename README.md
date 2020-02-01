@@ -8,11 +8,11 @@
 	<a target="_blank" href="https://github.com/Dreamacro/clash/releases/tag/v0.17.0">
     <img src="https://img.shields.io/badge/Clash-v0.17.0-blue.svg">
   </a>
-  <a target="_blank" href="https://github.com/vernesong/OpenClash/tree/v0.36.1-beta">
-    <img src="https://img.shields.io/badge/source code-v0.36.1--beta-green.svg">
+  <a target="_blank" href="https://github.com/vernesong/OpenClash/tree/v0.36.2-beta">
+    <img src="https://img.shields.io/badge/source code-v0.36.2--beta-green.svg">
   </a>
-  <a target="_blank" href="https://github.com/vernesong/OpenClash/releases/tag/v0.36.1-beta">
-    <img src="https://img.shields.io/badge/New Release-v0.36.1--beta-orange.svg">
+  <a target="_blank" href="https://github.com/vernesong/OpenClash/releases/tag/v0.36.2-beta">
+    <img src="https://img.shields.io/badge/New Release-v0.36.2--beta-orange.svg">
   </a>
   </p>
   
@@ -53,6 +53,7 @@
 * bash
 * wget
 * kmod-tun(TUN模式)
+* luci-compat(Luci-19.X)
 
 
 编译
@@ -101,6 +102,10 @@ make package/luci-app-openclash/luci-app-openclash/compile V=99
 * IP检查 [MyIP](https://github.com/SukkaW/MyIP) by [SukkaW](https://github.com/SukkaW)
 * 控制面板 [clash-dashboard](https://github.com/Dreamacro/clash-dashboard) by [Dreamacro](https://github.com/Dreamacro)
 * 控制面板 [yacd](https://github.com/haishanh/yacd) by [haishanh](https://github.com/haishanh)
+* lhie1规则 [lhie1-Rules](https://github.com/lhie1/Rules) by [lhie1](https://github.com/lhie1)
+* ConnersHua规则 [ConnersHua-Rules](https://github.com/ConnersHua/Profiles/tree/master) by [ConnersHua](https://github.com/ConnersHua)
+* 游戏规则 [SSTap-Rule](https://github.com/FQrabbit/SSTap-Rule) by [FQrabbit](https://github.com/FQrabbit)
+* 订阅转换API [Api_Constructor](https://fndroid.github.io/api_constructor/) by [Fndroid](https://github.com/Fndroid)
 
 
 请作者喝杯咖啡
@@ -136,7 +141,17 @@ make package/luci-app-openclash/luci-app-openclash/compile V=99
     <img src="https://github.com/vernesong/OpenClash/raw/master/img/servers.png">
 </p>
 
-* 配置文件
+* 游戏规则&策略组
+<p align="center">
+    <img src="https://github.com/vernesong/OpenClash/raw/master/img/game-settings.png">
+</p>
+
+* 配置文件订阅
+<p align="center">
+    <img src="https://github.com/vernesong/OpenClash/raw/master/img/config-subscribe.png">
+</p>
+
+* 配置文件管理
 <p align="center">
     <img src="https://github.com/vernesong/OpenClash/raw/master/img/config.png">
 </p>
