@@ -45,9 +45,10 @@ o:value("0", translate("Not Set"))
 o.default=0
 
 o = s:taboption("settings", ListValue, "en_mode", font_red..bold_on..translate("Select Mode")..bold_off..font_off)
-o.description = translate("Select Mode For OpenClash Work, Network Error Try Flush DNS Cache")
+o.description = translate("Select Mode For OpenClash Work, Try Flush DNS Cache If Network Error")
 o:value("redir-host", translate("redir-host"))
 o:value("fake-ip", translate("fake-ip"))
+o:value("redir-host-tun", translate("redir-host(tun mode)"))
 o:value("fake-ip-tun", translate("fake-ip(tun mode)"))
 o:value("redir-host-vpn", translate("redir-host-vpn(game mode)"))
 o:value("fake-ip-vpn", translate("fake-ip-vpn(game mode)"))
@@ -209,7 +210,19 @@ o:depends("rule_source", "ConnersHua")
    o:value(l)
    end
    file:seek("set")
-o = s:taboption("rules", ListValue, "Netease_Music", translate("Netease Music"))
+o = s:taboption("rules", ListValue, "Netflix", translate("Netflix"))
+o:depends("rule_source", "lhie1")
+ for l in file:lines() do
+   o:value(l)
+   end
+   file:seek("set")
+o = s:taboption("rules", ListValue, "Spotify", translate("Spotify"))
+o:depends("rule_source", "lhie1")
+ for l in file:lines() do
+   o:value(l)
+   end
+   file:seek("set")
+o = s:taboption("rules", ListValue, "Steam", translate("Steam"))
 o:depends("rule_source", "lhie1")
  for l in file:lines() do
    o:value(l)
@@ -222,6 +235,12 @@ o:depends("rule_source", "lhie1")
    end
    file:seek("set")
 o = s:taboption("rules", ListValue, "Telegram", translate("Telegram"))
+o:depends("rule_source", "lhie1")
+ for l in file:lines() do
+   o:value(l)
+   end
+   file:seek("set")
+o = s:taboption("rules", ListValue, "Netease_Music", translate("Netease Music"))
 o:depends("rule_source", "lhie1")
  for l in file:lines() do
    o:value(l)
@@ -329,7 +348,7 @@ o.title = translate("Dashboard Port")
 o.default = 9090
 o.datatype = "port"
 o.rmempty = false
-o.description = translate("Dashboard Address Example:").." "..font_green..bold_on..lan_ip.."/openclash、"..lan_ip..':'..cn_port..'/ui'..bold_off..font_off
+o.description = translate("Dashboard Address Example:").." "..font_green..bold_on..lan_ip.."/luci-static/openclash、"..lan_ip..':'..cn_port..'/ui'..bold_off..font_off
 
 o = s:taboption("dashboard", Value, "dashboard_password")
 o.title = translate("Dashboard Secret")

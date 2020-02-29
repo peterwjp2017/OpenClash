@@ -460,8 +460,7 @@ Rule:
 
 # (HKMTMedia)
 # > 愛奇藝台灣站
-- DOMAIN-SUFFIX,iqiyi.com,HKMTMedia
-- DOMAIN-SUFFIX,71.am,HKMTMedia
+- DOMAIN,cache.video.iqiyi.com,HKMTMedia
 # > bilibili
 - DOMAIN-SUFFIX,bilibili.com,HKMTMedia
 - DOMAIN,upos-hz-mirrorakam.akamaized.net,HKMTMedia
@@ -1289,6 +1288,8 @@ Rule:
 - DOMAIN-SUFFIX,wiley.com,DIRECT
 - DOMAIN-SUFFIX,worldbank.org,DIRECT
 - DOMAIN-SUFFIX,worldscientific.com,DIRECT
+# > Plex Media Server
+- DOMAIN-SUFFIX,plex.tv,DIRECT
 # > Other
 - DOMAIN-SUFFIX,cn,DIRECT
 - DOMAIN-SUFFIX,360in.com,DIRECT

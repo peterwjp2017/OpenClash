@@ -8,6 +8,11 @@ local fs = require "luci.openclash"
 local uci = require("luci.model.uci").cursor()
 local CHIF = "0"
 
+font_green = [[<font color="green">]]
+font_off = [[</font>]]
+bold_on  = [[<strong>]]
+bold_off = [[</strong>]]
+
 function IsYamlFile(e)
    e=e or""
    local e=string.lower(string.sub(e,-5,-1))
@@ -19,7 +24,7 @@ function IsYmlFile(e)
    return e == ".yml"
 end
     
-ful = SimpleForm("upload", translate("Server Config"), nil)
+ful = SimpleForm("upload", translate("Config Manage"), nil)
 ful.reset = false
 ful.submit = false
 
@@ -88,6 +93,16 @@ if HTTP.formvalue("upload") then
 	end
 end
 
+local function i(e)
+local t=0
+local a={' KB',' MB',' GB',' TB'}
+repeat
+e=e/1024
+t=t+1
+until(e<=1024)
+return string.format("%.1f",e)..a[t]
+end
+
 local e,a={}
 for t,o in ipairs(fs.glob("/etc/openclash/config/*"))do
 a=fs.stat(o)
@@ -101,7 +116,7 @@ if string.sub(luci.sys.exec("uci get openclash.config.config_path"), 23, -2) == 
 else
    e[t].state=translate("Disable")
 end
-e[t].size=tostring(a.size)
+e[t].size=i(a.size)
 e[t].remove=0
 e[t].enable=false
 end
@@ -123,6 +138,7 @@ form.reset=false
 form.submit=false
 tb=form:section(Table,e)
 st=tb:option(DummyValue,"state",translate("State"))
+st.template="openclash/cfg_check"
 nm=tb:option(DummyValue,"name",translate("Config Alias"))
 mt=tb:option(DummyValue,"mtime",translate("Update Time"))
 sz=tb:option(DummyValue,"size",translate("Size"))
@@ -197,7 +213,7 @@ if r then
 p[x]={}
 p[x].name=fs.basename(y)
 p[x].mtime=os.date("%Y-%m-%d %H:%M:%S",r.mtime)
-p[x].size=tostring(r.size)
+p[x].size=i(r.size)
 p[x].remove=0
 p[x].enable=false
 end
@@ -267,11 +283,13 @@ s = m:section(Table, tab)
 
 local conf = string.sub(luci.sys.exec("uci get openclash.config.config_path"), 1, -2)
 local dconf = "/etc/openclash/default.yaml"
+local conf_name = fs.basename(conf)
+if not conf_name then conf_name = "config.yaml" end
 
 sev = s:option(Value, "user")
 sev.template = "cbi/tvalue"
-sev.description = translate("You Can Modify config file Here, Except The Settings That Were Taken Over")
-sev.rows = 20
+sev.description = translate("Modify Your Config file:").." "..font_green..bold_on..conf_name..bold_off..font_off.." "..translate("Here, Except The Settings That Were Taken Over")
+sev.rows = 40
 sev.wrap = "off"
 sev.cfgvalue = function(self, section)
 	return NXFS.readfile(conf) or NXFS.readfile(dconf) or ""
@@ -279,14 +297,14 @@ end
 sev.write = function(self, section, value)
 if (CHIF == "0") then
     value = value:gsub("\r\n?", "\n")
-		NXFS.writefile(conf, value)
+    NXFS.writefile(conf, value)
 end
 end
 
 def = s:option(Value, "default")
 def.template = "cbi/tvalue"
 def.description = translate("Default Config File With Correct General-Settings")
-def.rows = 20
+def.rows = 40
 def.wrap = "off"
 def.readonly = true
 def.cfgvalue = function(self, section)
